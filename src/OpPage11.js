@@ -7,6 +7,8 @@ class OpPage11 extends OpPage {
         switch (y) {
           case 0b000:
             return this.ops.jmp(state);
+          case 0b101:
+            return this.ops.xchg(state);
           default:
             this.ops.unsupported();
         }

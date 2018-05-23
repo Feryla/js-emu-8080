@@ -13,6 +13,16 @@ class OpPage00 extends OpPage {
             return this.ops.lda(state);
           case 0b110:
             return this.ops.sta(state);
+          case 0b101:
+            return this.ops.lhld(state);
+          case 0b100:
+            return this.ops.shld(state);
+          case 0b011:
+          case 0b001:
+            return this.ops.ldax(state, y >> 1);
+          case 0b000:
+          case 0b010:
+            return this.ops.stax(state, y >> 1);
           default:
             this.ops.unsupported();
         }

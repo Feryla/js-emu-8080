@@ -1,5 +1,6 @@
-export const incrementPc = (state, incr) => {
-  state.registers.pc += incr;
+export const incrementPcAndCycles = (state, pc, cycles) => {
+  state.registers.pc += pc;
+  state.cycles += cycles;
 };
 
 export const hl = state => ((0x00 | state.registers.h) << 8) | state.registers.l;
@@ -43,5 +44,31 @@ export const getPatternForRegisterKey = key => {
       return 0b101;
     default:
       throw new Error('Invalid register key');
+  }
+};
+
+export const getRpKeyLow = pattern => {
+  switch (pattern) {
+    case 0b00:
+      return 'c';
+    case 0b01:
+      return 'e';
+    case 0b10:
+      return 'l';
+    default:
+      throw new Error('Invalid RP pattern');
+  }
+};
+
+export const getRpKeyHigh = pattern => {
+  switch (pattern) {
+    case 0b00:
+      return 'b';
+    case 0b01:
+      return 'd';
+    case 0b10:
+      return 'h';
+    default:
+      throw new Error('Invalid RP pattern');
   }
 };

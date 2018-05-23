@@ -5,7 +5,7 @@
 import * as utils from './instructionUtils';
 
 export const nop = state => {
-  utils.incrementPc(state, 1);
+  utils.incrementPcAndCycles(state, 1, 1);
 };
 
 export const dummy = state => state;
