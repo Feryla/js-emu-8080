@@ -1,2 +1,3 @@
-# js-space-invaders
-Space Invaders Emulator written in javascript
+# js-emu-8080
+
+8080 Emulator written in javascript
