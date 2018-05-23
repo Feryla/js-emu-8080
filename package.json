@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "test": "jest"
+    "test": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "testlocal": "jest"
   },
   "author": "Sondre Hisdal",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "coveralls": "^3.0.1",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
