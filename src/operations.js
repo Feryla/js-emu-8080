@@ -1,34 +1,42 @@
-const State8080 = require('./State8080');
+export const getRpKeyLow = pattern => {
+  switch (pattern) {
+    case 0b00:
+      return 'c';
+    case 0b01:
+      return 'e';
+    case 0b10:
+      return 'l';
+    default:
+      throw new Error('Invalid RP pattern');
+  }
+};
+
+export const getRpKeyHigh = pattern => {
+  switch (pattern) {
+    case 0b00:
+      return 'b';
+    case 0b01:
+      return 'd';
+    case 0b10:
+      return 'h';
+    default:
+      throw new Error('Invalid RP pattern');
+  }
+};
 
 const ops = {
-  nop(state) {
-    return this.incrementPc(state, 1);
-  },
-  unsupported() {
-    throw new Error('Unsupported op');
-  },
-  jmp(state) {
-    const low = state.memory[state.pc + 1];
-    const high = state.memory[state.pc + 2];
-    state.pc = ((0x00 | high) << 8) | low;
-  },
   lxi(state, rp) {
     const low = state.memory[state.pc + 1];
     const high = state.memory[state.pc + 2];
     if (rp === 0b11) {
       state.sp = ((0x00 | high) << 8) | low;
     } else {
-      state.setValue(State8080.getRpKeyLow(rp), low);
-      state.setValue(State8080.getRpKeyHigh(rp), high);
+      // state.setValue(State8080.getRpKeyLow(rp), low);
+      // state.setValue(State8080.getRpKeyHigh(rp), high);
     }
     this.incrementPc(state, 3);
   },
-  call(state) {
-    state.memory[state.sp - 1] = state.pc >> 8;
-    state.memory[state.sp - 2] = state.pc & 0b11111111;
-    state.sp -= 2;
-    this.jmp(state);
-  },
+
   lda(state) {
     const low = state.memory[state.pc + 1];
     const high = state.memory[state.pc + 2];

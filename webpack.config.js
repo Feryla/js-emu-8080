@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '8080.bundle.js'
+    filename: 'emu8080.js'
   },
   module: {
     rules: [
