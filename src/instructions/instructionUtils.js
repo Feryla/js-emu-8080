@@ -24,3 +24,24 @@ export const getRegisterKey = pattern => {
       throw new Error('Invalid register pattern');
   }
 };
+
+export const getPatternForRegisterKey = key => {
+  switch (key) {
+    case 'a':
+      return 0b111;
+    case 'b':
+      return 0b000;
+    case 'c':
+      return 0b001;
+    case 'd':
+      return 0b010;
+    case 'e':
+      return 0b011;
+    case 'h':
+      return 0b100;
+    case 'l':
+      return 0b101;
+    default:
+      throw new Error('Invalid register key');
+  }
+};

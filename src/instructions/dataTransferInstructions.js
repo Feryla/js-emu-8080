@@ -1,3 +1,6 @@
+/**
+ * This group of instructions transfers data to and from registers and memory. Condition flags are not affected by any instruction in this group.
+ */
 import { getRegisterKey, hl, incrementPc } from './instructionUtils';
 
 export const mov = (state, dest, source) => {
