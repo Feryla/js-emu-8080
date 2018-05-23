@@ -24,8 +24,15 @@ const fresh = {
 
 export const copyState = state =>
   Object.assign({}, state, {
+    memory: state.memory.slice(),
     registers: Object.assign({}, state.registers),
     conditionFlags: Object.assign({}, state.conditionFlags)
   });
 
-export const freshState = () => copyState(fresh);
+export const freshState = () => {
+  const state = copyState(fresh);
+  for (let i = 0; i < state.memory.length; i += 1) {
+    state.memory[i] = 0;
+  }
+  return state;
+};
