@@ -1,25 +1,11 @@
-import { copyState } from './stateUtil';
-
 const State8080 = require('./State8080');
 
 const ops = {
   nop(state) {
     return this.incrementPc(state, 1);
   },
-  incrementPc(state, incr) {
-    const newState = copyState(state);
-    newState.registers.pc += incr;
-    return newState;
-  },
   unsupported() {
     throw new Error('Unsupported op');
-  },
-  mov(state, dest, source) {
-    state.setValue(dest, state.getValue(source));
-  },
-  mvi(state, dest) {
-    state.setValue(dest, state.memory[state.pc + 1]);
-    this.incrementPc(state, 2);
   },
   jmp(state) {
     const low = state.memory[state.pc + 1];

@@ -1,4 +1,4 @@
-const ops = require('./operations');
+const ops = require('./instructions');
 
 class OpPage {
   constructor() {

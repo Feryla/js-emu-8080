@@ -1,3 +1,5 @@
+import { copyState } from './stateUtil';
+
 const OpPage00 = require('./OpPage00');
 const OpPage01 = require('./OpPage01');
 const OpPage10 = require('./OpPage10');
@@ -20,14 +22,15 @@ class CPU8080 {
    * @returns the new state
    */
   process(state) {
-    const opCode = state.memory[state.registers.pc];
-    console.log((opCode >>> 0).toString(2));
+    const newState = copyState(state);
+    const opCode = newState.memory[newState.registers.pc];
 
     const xx = (opCode >> 6) & 0b11;
     const yyy = (opCode >> 3) & 0b111;
     const zzz = opCode & 0b111;
 
-    return this.opPages[xx].processOp(state, yyy, zzz);
+    this.opPages[xx].processOp(newState, yyy, zzz);
+    return newState;
   }
 }
 
