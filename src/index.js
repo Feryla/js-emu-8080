@@ -1,14 +1,49 @@
-const fs = require('fs');
-const CPU8080 = require('./CPU8080');
+import CPU8080 from './CPU8080';
+import { freshState } from './stateUtil';
 
-const rom = fs.readFileSync('./data/invaders.rom');
+class EMU8080 {
+  constructor() {
+    this.running = false;
+    this.state = freshState();
+    this.cpu = new CPU8080();
+  }
 
-const cpu = new CPU8080();
+  get registers() {
+    return this.state.registers;
+  }
 
-cpu.load(rom);
+  get memory() {
+    return this.state.memory;
+  }
 
-let x = 0;
-while (x < 10) {
-  x += 1;
-  cpu.emulateOp();
+  load(rom) {
+    const memory = new Uint8Array(65536);
+    rom.forEach((el, index) => {
+      memory[index] = el;
+    });
+    this.state = Object.assign({}, freshState(), { memory });
+  }
+
+  pause() {
+    this.running = false;
+  }
+
+  step(n) {
+    let count = 0;
+    while (count < n) {
+      count += 1;
+      const newState = this.cpu.process(this.state);
+      this.state = newState;
+    }
+  }
+
+  run() {
+    this.running = true;
+    while (this.running) {
+      const newState = this.cpu.process(this.state);
+      this.state = newState;
+    }
+  }
 }
+
+export default EMU8080;

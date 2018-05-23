@@ -56,8 +56,30 @@ class State8080 {
     }
   }
 
-  printState() {
-    console.log(this.a);
+  static getRpKeyLow(pattern) {
+    switch (pattern) {
+      case 0b00:
+        return 'c';
+      case 0b01:
+        return 'e';
+      case 0b10:
+        return 'l';
+      default:
+        throw new Error('Invalid RP pattern');
+    }
+  }
+
+  static getRpKeyHigh(pattern) {
+    switch (pattern) {
+      case 0b00:
+        return 'b';
+      case 0b01:
+        return 'd';
+      case 0b10:
+        return 'h';
+      default:
+        throw new Error('Invalid RP pattern');
+    }
   }
 }
 

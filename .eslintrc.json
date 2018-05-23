@@ -4,5 +4,13 @@
     "no-console": ["off"],
     "no-bitwise": ["off"],
     "no-param-reassign": ["off"]
-  }
+  },
+  "overrides": [
+    {
+      "files": "*.test.js",
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
 }

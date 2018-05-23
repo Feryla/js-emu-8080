@@ -6,6 +6,7 @@ class OpPage10 extends OpPage {
       default:
         this.ops.unsupported();
     }
+    return state;
   }
 }
 

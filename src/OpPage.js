@@ -6,6 +6,7 @@ class OpPage {
   }
   processOp(state, y, z) {
     this.ops.unsupported(state, y, z);
+    return state;
   }
 }
 
