@@ -9,7 +9,7 @@
     "testlocal": "jest"
   },
   "author": "Sondre Hisdal",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-jest": "^22.4.4",

@@ -72,3 +72,31 @@ export const getRpKeyHigh = pattern => {
       throw new Error('Invalid RP pattern');
   }
 };
+
+export const getCondition = pattern => {
+  switch (pattern) {
+    case 0b000:
+      return { key: 'z', value: 0 };
+    case 0b001:
+      return { key: 'z', value: 1 };
+    case 0b010:
+      return { key: 'cy', value: 0 };
+    case 0b011:
+      return { key: 'cy', value: 1 };
+    case 0b100:
+      return { key: 'p', value: 0 };
+    case 0b101:
+      return { key: 'p', value: 1 };
+    case 0b110:
+      return { key: 's', value: 0 };
+    case 0b111:
+      return { key: 's', value: 1 };
+    default:
+      throw new Error('Invalid Condition');
+  }
+};
+
+export const checkCondition = (state, pattern) => {
+  const cond = getCondition(pattern);
+  return state.conditionFlags[cond.key] === cond.value;
+};

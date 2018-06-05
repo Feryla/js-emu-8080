@@ -3,6 +3,8 @@ const OpPage = require('./OpPage');
 class OpPage11 extends OpPage {
   processOp(state, y, z) {
     switch (z) {
+      case 0b010:
+        return this.ops.condJmp(state, y);
       case 0b011:
         switch (y) {
           case 0b000:
@@ -13,6 +15,8 @@ class OpPage11 extends OpPage {
             this.ops.unsupported();
         }
         break;
+      case 0b100:
+        return this.ops.condCall(state, y);
       case 0b101:
         switch (y) {
           case 0b001:
