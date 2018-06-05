@@ -58,3 +58,15 @@ test('condcall', () => {
   expect(newState.registers.sp).toBe(state.registers.sp - 2);
   expect(newState.registers.pc).toBe(12);
 });
+
+test('condcall', () => {
+  const state = freshState();
+  state.registers.pc = 128;
+  state.registers.sp = 256;
+  state.memory[state.registers.pc + 1] = 12;
+  state.memory[state.registers.pc + 2] = 0;
+  state.conditionFlags.z = 1;
+  const newState = copyState(state);
+  condCall(newState, 0b000); // pattern for z == 0
+  expect(newState.registers.pc).toBe(129);
+});
