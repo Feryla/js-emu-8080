@@ -76,6 +76,14 @@ test('lxi bc', () => {
   expect(state.registers.c).toBe(128);
 });
 
+test('lxi sp', () => {
+  const state = freshState();
+  state.memory[state.registers.pc + 1] = 128;
+  state.memory[state.registers.pc + 2] = 1;
+  lxi(state, 0b11);
+  expect(state.registers.sp).toBe(384);
+});
+
 test('lda', () => {
   const val = 123;
   const state = freshState();
@@ -124,20 +132,20 @@ test('shld', () => {
 test('ldax', () => {
   const val = 123;
   const state = freshState();
-  state.registers.b = 1;
-  state.registers.c = 128;
+  state.registers.d = 1;
+  state.registers.e = 128;
   state.memory[384] = val;
-  ldax(state, 0b00);
+  ldax(state, 0b01);
   expect(state.registers.a).toBe(val);
 });
 
 test('stax', () => {
   const val = 123;
   const state = freshState();
-  state.registers.b = 1;
-  state.registers.c = 128;
+  state.registers.h = 1;
+  state.registers.l = 128;
   state.registers.a = val;
-  stax(state, 0b00);
+  stax(state, 0b10);
   expect(state.memory[384]).toBe(val);
 });
 
